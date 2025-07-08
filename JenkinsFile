@@ -1,0 +1,39 @@
+pipeline{
+ agent any
+ stages{ 
+     stage('clone'){
+         steps{ 
+             sh '''
+                 rm -rf all-in-one
+                 git clone --branch master https://github.com/Ge-raldh25/all-in-one.git
+                 '''
+            }
+      }
+      stage('build'){
+          steps {
+              sh '''
+                
+                 cd all-in-one
+                 ls -1
+                 git pull
+                 mkdir -p /tmp/all-in-one-copie
+                 cp  -r  Citation.html /tmp/all-in-one-copie
+                 echo "Build terminé: fichiers copiés dans dist/ (siulation build)"
+                 '''
+          }
+      }
+      stage('run'){
+          steps{
+                 
+              sh '''  
+              cd /tmp/all-in-one-copie                          
+              nohup python3 -m http.server 83  --bind 0.0.0.0 > /tmp/server.log 2>&1   &
+              echo "serveur démarré: http://0.0.0.0:83"
+              
+                
+                 '''
+          }
+      }
+      
+ } 
+}
