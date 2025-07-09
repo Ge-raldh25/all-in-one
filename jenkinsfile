@@ -37,17 +37,12 @@ pipeline {
                                     }
 
             stage('Push to Registry (optionnel)') {
-               when {
-               expression {
-                     // Mets true si tu veux pousser sur un registry
-                     return false
-                           }
-                     }
                steps {
                   sh '''
-                  echo "Connexion au registry (ex: Docker Hub, GitHub Container Registry, etc.)"
-                  docker tag citation moncompte/citation:latest
-                  docker push moncompte/citation:latest
+                  echo "Connexion au registry  Docker Hub"
+                  docker login -u geraldh443 -p 0149Jss.@
+                  docker tag citation geraldh443/citation:latest
+                  docker push geraldh/citation:latest
                      '''
                      }
                                                   }
