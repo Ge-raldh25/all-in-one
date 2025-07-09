@@ -1,0 +1,56 @@
+pipeline {
+    agent any 
+      stages {
+          stage('Clone') {
+          steps {
+            sh '''
+            rm -rf all-in-one
+            git clone --branch master https://github.com/Ge-raldh25/all-in-one.git
+              '''
+                }
+                         }
+                         
+            //stage('Analyse (optionnel)') {
+            //steps {
+            //echo "Ici, tu peux ajouter SonarQube si tu veux analyser ton code HTML (ex: lint, check qualité, etc.)"
+               //   }
+                              //           }
+                                         
+            stage('Build') {
+            steps {
+               sh '''
+               cd all-in-one
+               ls -1
+               echo "Build terminé : fichiers prêts pour Docker."
+                   '''
+                   }
+                            }
+
+              stage('Docker Build') {
+              steps {
+                 sh '''
+                 cd all-in-one
+                 docker build -t citation .
+                 echo "Image Docker construite : citation"
+                     '''
+                    }
+                                    }
+
+            stage('Push to Registry (optionnel)') {
+               when {
+               expression {
+                     // Mets true si tu veux pousser sur un registry
+                     return false
+                           }
+                     }
+               steps {
+                  sh '''
+                  echo "Connexion au registry (ex: Docker Hub, GitHub Container Registry, etc.)"
+                  docker tag citation moncompte/citation:latest
+                  docker push moncompte/citation:latest
+                     '''
+                     }
+                                                  }
+
+  }
+}
