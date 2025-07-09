@@ -42,7 +42,7 @@ pipeline {
                   echo "Connexion au registry  Docker Hub"
                   docker login -u geraldh443 -p 0149Jss.@
                   docker tag citation geraldh443/citation:latest
-                  docker push geraldh/citation:latest
+                  docker push geraldh443/citation:latest
                      '''
                      }
                                                   }
