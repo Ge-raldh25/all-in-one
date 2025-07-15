@@ -1,8 +1,19 @@
-# Utiliser une image légère Nginx
-FROM nginx:alpine
+FROM python:3.11-slim
 
-# Copier ton fichier HTML dans le dossier web par défaut
-COPY Citation.html /usr/share/nginx/html/index.html 
+# Définir le répertoire de travail dans le conteneur
+WORKDIR /app
 
-# Exposer le port 85 (interne)
-EXPOSE 80
+# Copier le fichier des dépendances
+COPY requirements.txt .
+
+# Installer les dépendances Python
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Copier le code source
+COPY app.py .
+
+# Exposer le port sur lequel l'app écoute
+EXPOSE 5000
+
+# Lancer l'application
+CMD ["python", "app.py"]
