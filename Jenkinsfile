@@ -29,9 +29,9 @@ pipeline {
 
          stage('Push to Docker Hub') {
             steps {
-                 withCredentials([usernamePassword(credentialsId: 'docker-hub-credentials', usernameVariable: 'DOCKER_HUB_USER', passwordVariable: 'DOCKER_HUB_PASS')]) {
+                 withCredentials([usernamePassword(credentialsId: 'docker-hub-credentials', usernameVariable: 'geraldh443', passwordVariable: '0149Jss.@')]) {
                  sh '''
-                    echo "$DOCKER_HUB_PASS" | docker login -u "$DOCKER_HUB_USER" --password-stdin
+                    echo "0149Jss.@" | docker login -u "$geraldh443" --password-stdin
                     docker push ${IMAGE_NAME}:${IMAGE_TAG}
                     echo " Image poussée sur Docker Hub"
                     '''
