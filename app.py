@@ -1,23 +1,31 @@
-from flask import Flask
+from flask import Flask, jsonify, request
 import requests
 
 app = Flask(__name__)
 
-@app.route("/")
-def devops_info():
-	try:
-# On récupère le résumé de l'article Wikipedia "DevOps"
-	    response = requests.get("https://en.wikipedia.org/api/rest_v1/page/summary/DevOps")
-	    data = response.json()
-            summary = data.get("extract", "Aucune information trouvée.")
-	except Exception as e:
-	    summary = f"Erreur lors de la récupération des informations : {e}"
+@app.route('/summary', methods=['GET'])
+def get_wikipedia_summary():
+    try:
+        topic = request.args.get('topic')
+        if not topic:
+            return jsonify({"error": "Aucun sujet fourni."}), 400
 
-	    html = f"""
-	            <h1 style='color: green;'> Informations sur le DevOps</h1>
-	            <p>{summary}</p>
-                    """
-	return html
+        url = f"https://fr.wikipedia.org/api/rest_v1/page/summary/{topic}"
+        response = requests.get(url)
 
-	if __name__ == "__main__":
-	app.run(host="0.0.0.0", port=5000)
+        if response.status_code != 200:
+            return jsonify({"error": "Erreur lors de la récupération de l'article."}), 500
+
+        data = response.json()
+        summary = data.get("extract", "Aucune information trouvée.")
+        return jsonify({"summary": summary})
+
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
+@app.route('/')
+def home():
+    return "Bienvenue sur l'API de résumé Wikipedia (FR) !"
+
+if __name__ == '__main__':
+    app.run(host='0.0.0.0', port=5000)
