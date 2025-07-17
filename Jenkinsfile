@@ -2,7 +2,7 @@ pipeline {
     agent any
 
         environment {
-             IMAGE_NAME = "geraldh443/deploy"
+             IMAGE_NAME = "geraldh443/application"
              IMAGE_TAG = "latest"
              REPO_URL = "https://github.com/Ge-raldh25/all-in-one.git"
                    }
