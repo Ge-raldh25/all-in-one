@@ -1,0 +1,19 @@
+# Dossiers Python
+--pycache--/
+*.pyc
+*.pyo
+# Dossiers et fichiers liés à git 
+.git/
+.gitignore
+# Fichiers de logs
+*.log
+# Données ou DB locales
+*.db
+*.sqlite3
+# Fichiers sensibles
+.env
+.env.*
+# Docker 
+Dockerfile
+.dockerignore
+

@@ -1,0 +1,114 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Facturation Téléphonique</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 0; padding: 0; }
+        header { background-color: #0078D7; color: white; padding: 20px; text-align: center; }
+        nav { background-color: #005a9e; padding: 10px; text-align: center; }
+        nav a { color: white; margin: 0 15px; text-decoration: none; font-weight: bold; }
+        section { padding: 20px; display: none; }
+        section.active { display: block; }
+        .carousel { display: flex; overflow-x: auto; gap: 20px; padding: 10px; }
+        .carousel div { min-width: 150px; background: #eee; padding: 10px; text-align: center; border-radius: 5px; }
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        th, td { border: 1px solid #ccc; padding: 8px; text-align: center; }
+        .teams-logo { height: 120px; vertical-align: middle; margin-right: 1000px; }
+    </style>
+</head>
+<body>
+
+<header>
+   <h1> </h1><img src="total.png" class="teams-logo" alt="Teams Logo"> </p> Plateforme de Facturation Téléphonique</p>
+    
+    </h1>
+</header>
+
+<nav>
+    <a href="#" onclick="showSection('accueil')">Accueil</a>
+    <a href="#" onclick="showSection('achat')">Achat Crédit</a>
+    <a href="#" onclick="showSection('admin')">Admin</a>
+</nav>
+
+<section id="accueil" class="active">
+    <h2>Bienvenue sur notre plateforme</h2>
+   <h3> Mot du Directeur <p>Notre entreprise fournit des services de téléphonie pour les entreprises sous-traitantes</tr></h3>
+    <p>Notre entreprise fournit des services de téléphonie pour les entreprises sous-traitantes.</p>
+    <h3>Mot du Directeur</h3>
+    <p>Nous nous engageons à fournir un service fiable et transparent à tous nos partenaires.</p>
+    <h3>Tableau de bord</h3>
+    <p>Nombre total de clients : <strong>128</strong></p>
+    <h3>Nos partenaires</h3>
+    <div class="carousel">
+        <div><img src="spie.png"/>
+        </div>
+        <div><img src="eni.png"/></div>
+        <div><img src="ponticili.jpg"/></div>
+        <div><img src="slb.png"/></div>
+        <div><img src="perenco.png"/>/div>
+    </div>
+</section>
+
+<section id="achat">
+    <h2>Achat de Crédit</h2>
+    <form>
+        <label>Nom du client : <input type="text" name="nom"></label><br><br>
+        <label>Montant du crédit : <input type="number" name="montant"></label><br><br>
+        <label>Méthode d'achat :
+            <select name="methode">
+                <option>Par équipe</option>
+                <option>Autre</option>
+            </select>
+        </label><br><br>
+        <label>Pays :
+            <select name="pays">
+                <option>Gabon</option>
+                <option>France</option>
+                <option>Italie</option>
+                <option>USA</option>
+            </select>
+        </label><br><br>
+        <button type="submit">Acheter</button>
+    </form>
+</section>
+
+<section id="admin">
+    <h2>Tableau de bord Administrateur</h2>
+    <canvas id="chart" width="600" height="300"></canvas>
+    <h3>Facturation par entreprise sous-traitante</h3>
+    <table>
+        <tr><th>Entreprise</th><th>Nombre d'appels</th><th>Crédit utilisé (FCFA)</th></tr>
+        <tr><td>Ponticelli</td><td>120</td><td>24,000</td></tr>
+        <tr><td>ENI</td><td>95</td><td>19,000</td></tr>
+        <tr><td>SPIE</td><td>110</td><td>22,000</td></tr>
+        <tr><td>PERENCO</td><td>130</td><td>26,000</td></tr>
+        <tr><td>SCHLUMBERGER</td><td>80</td><td>16,000</td></tr>
+    </table>
+</section>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    function showSection(id) {
+        document.querySelectorAll('section').forEach(s => s.classList.remove('active'));
+        document.getElementById(id).classList.add('active');
+    }
+
+    const ctx = document.getElementById('chart').getContext('2d');
+    new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: ['Jan', 'Fév', 'Mar', 'Avr', 'Mai', 'Juin'],
+            datasets: [{
+                label: 'Crédit utilisé (FCFA)',
+                data: [4000, 5000, 4500, 6000, 7000, 8000],
+                borderColor: 'blue',
+                fill: false
+            }]
+        }
+    });
+</script>
+
+</body>
+</html>
