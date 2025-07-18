@@ -21,7 +21,7 @@ pipeline {
             steps {
                 sh '''
                    cd all-in-one
-                   docker build -t ${IMAGE_NAME}:${IMAGE_TAG} .
+                   docker build -t ${IMAGE_NAME}:${IMAGE_TAG}  -f docfile_html .
                    echo " Image Docker construite : ${IMAGE_NAME}:${IMAGE_TAG}"
                    '''
                    }
