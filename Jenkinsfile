@@ -20,7 +20,7 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 sh '''
-                   cd all-in-one
+                   cd /all-in-one/facturation-app
                    docker build -t ${IMAGE_NAME}:${IMAGE_TAG}  -f docfile_html .
                    echo " Image Docker construite : ${IMAGE_NAME}:${IMAGE_TAG}"
                    '''
