@@ -39,15 +39,6 @@ pipeline {
                   }
                                      }
 
-          stage('Deploy on VM2 with Ansible') {
-             steps {
-                  withCredentials([sshUserPrivateKey(credentialsId: 'vm2-ssh-key', keyFileVariable: 'SSH_KEY')]) {
-                  sh '''
-                     ssh -o StrictHostKeyChecking=no -i $SSH_KEY user@172.18.46.92 '
-                     cd /home/cicd &&
-                     ansible-playbook -i hosts Deploy.yml                                                          '
-                     '''
-                   }                                                                                              }
                                                }
         }
 }
